@@ -10,11 +10,16 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     volumes:
-      - ./ESRGAN:/app/ESRGAN:ro
-      - ./repositories:/app/repositories:ro
-      - ./src:/app/src:ro
+      - ./modules:/app/modules:ro,z
+      - ./style.css:/app/style.css:ro,z
+      - ./ESRGAN:/app/ESRGAN:ro,z
+      - ./repositories:/app/repositories:ro,z
+      - ./src:/app/src:ro,z
+      - ./embeddings:/app/embeddings:ro,z
       - cache:/home/webui/.cache
+      - realesrgan:/usr/local/lib/python3.10/dist-packages/realesrgan/weights
       - ./outputs:/app/outputs
+      - ./log:/app/log
       - ./runtime:/app/runtime
     ports:
       - 7860:7860
@@ -26,3 +31,4 @@ services:
 
 volumes:
   cache:
+  realesrgan:
